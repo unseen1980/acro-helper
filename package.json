@@ -1,0 +1,36 @@
+{
+  "name": "acro-helper",
+  "displayName": "Acronyms and Abbreviations helper",
+  "version": "0.0.1",
+  "description": "Get definitions for tech acronyms and abbreviations.",
+  "author": "I335123",
+  "scripts": {
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package"
+  },
+  "dependencies": {
+    "@extractus/article-extractor": "7.2.8",
+    "@mozilla/readability": "^0.4.2",
+    "plasmo": "0.62.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@plasmohq/prettier-plugin-sort-imports": "3.6.1",
+    "@types/chrome": "0.0.208",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "prettier": "2.8.2",
+    "typescript": "4.9.4"
+  },
+  "manifest": {
+    "host_permissions": [
+      "https://*/*"
+    ],
+    "permissions": [
+      "tabs"
+    ]
+  }
+}
