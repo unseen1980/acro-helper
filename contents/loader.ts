@@ -36,6 +36,13 @@ const css = `
   .acro-helper:hover .tooltiptext {
     visibility: visible;
   }
+
+  abbr {
+    text-decoration-color: royalblue;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    cursor: help;
+  }
 `,
   head = document.head || document.getElementsByTagName("head")[0],
   style = document.createElement("style")

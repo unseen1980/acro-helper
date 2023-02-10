@@ -6,7 +6,8 @@ export const replacer = (selector, string, definition) => {
   let txt = str.replace(
     rgx,
     // `<div class='acro-helper'>$1<span class="tooltiptext">${definition}</span></div>`
-    `<div class='acro-helper' title="${definition}">$1</div>`
+    // `<div class='acro-helper' title="${definition}">$1</div>`
+    `<dfn><abbr title="${definition}">$1</abbr></dfn>`
   ) //D
   dom.replaceChildren() //E
   dom.insertAdjacentHTML("beforeend", txt) //F
