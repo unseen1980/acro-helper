@@ -1,7 +1,7 @@
 import type { PlasmoContentScript } from "plasmo"
 
 import { getDictionaryKeys } from "~lib/dictionary"
-import { keyFinder } from "~lib/key-finder"
+import { chatgpt, keyFinder } from "~lib/key-finder"
 import { readabilityParser } from "~lib/readability"
 import { sanitizer } from "~lib/sanitizer"
 import { categorization } from "~lib/taxonomy"
@@ -63,9 +63,13 @@ window.addEventListener("load", async () => {
   const category = await categorization(textFromArticle)
   console.log("Google Taxonomy: ", category)
 
-  const dictionaryKeys = await getDictionaryKeys()
-  console.log("Dictionary keys", dictionaryKeys)
+  //Temp disable to test ChatGPT API
+  // const dictionaryKeys = await getDictionaryKeys()
+  // console.log("Dictionary keys", dictionaryKeys)
 
-  await keyFinder(dictionaryKeys)
+  // await keyFinder(dictionaryKeys)
+
+  await chatgpt(textFromArticle)
+
   console.log("Tooltips appended.")
 })

@@ -20,3 +20,27 @@ export const keyFinder = async (dictionaryKeys) => {
     replacer("body", key, definition)
   })
 }
+
+export const chatgpt = async (textFromArticle) => {
+  const rawResponse = await fetch(
+    "https://acro-helper.cyclic.app/api/chatgpt",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      //@ts-ignore
+      body: JSON.stringify({
+        text: textFromArticle
+      })
+    }
+  )
+
+  const findings = await rawResponse.json()
+  console.log("Findings: ", findings)
+
+  findings.response.forEach((f) => {
+    replacer("body", f.acronym, `${f.definition} - ${f.description}`)
+  })
+}
