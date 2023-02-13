@@ -4,12 +4,13 @@ import { getDictionaryKeys } from "~lib/dictionary"
 import { chatgpt, keyFinder } from "~lib/key-finder"
 import { readabilityParser } from "~lib/readability"
 import { sanitizer } from "~lib/sanitizer"
-import { categorization } from "~lib/taxonomy"
+import { categorization, isTechRelatedWebpage } from "~lib/taxonomy"
 import { whiteSpaceTrimmer } from "~lib/text-cleaner"
 
-// export const config: PlasmoContentScript = {
-//   matches: ["https://rsvt.pages.dev/*"]
-// }
+export const config: PlasmoContentScript = {
+  // matches: ["https://rsvt.pages.dev/*"]
+  exclude_matches: ["*://*/*google*"]
+}
 
 const css = `
 .acro-helper {
@@ -60,16 +61,28 @@ window.addEventListener("load", async () => {
   const textFromArticle = whiteSpaceTrimmer(article)
   console.log("Text extraction: ", textFromArticle)
 
-  const category = await categorization(textFromArticle)
-  console.log("Google Taxonomy: ", category)
+  const categories = await categorization(textFromArticle)
+  if (categories.response.categories)
+    console.log("Google Taxonomy: ", categories.response.categories)
 
-  //Temp disable to test ChatGPT API
-  // const dictionaryKeys = await getDictionaryKeys()
-  // console.log("Dictionary keys", dictionaryKeys)
+  const enableExtensionReplacements = await isTechRelatedWebpage(
+    categories.response.categories
+  )
+  if (enableExtensionReplacements)
+    console.log("Enable extension replacements: ", enableExtensionReplacements)
 
-  // await keyFinder(dictionaryKeys)
+  if (enableExtensionReplacements) {
+    const dictionaryKeys = await getDictionaryKeys()
+    console.log("Dictionary keys", dictionaryKeys)
 
-  await chatgpt(textFromArticle)
+    await keyFinder(dictionaryKeys)
 
-  console.log("Tooltips appended.")
+    await chatgpt(textFromArticle)
+
+    console.log("Tooltips appended.")
+  } else {
+    console.log(
+      "This is not a technology related webpage. Thanks for using Acro Helper."
+    )
+  }
 })

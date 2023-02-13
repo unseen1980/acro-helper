@@ -1,6 +1,6 @@
 export const sanitizer = (doc) => {
   const selector =
-    "header, footer, nav, script, meta, head, link, a[id*=cookie i], a[class*=cookie i], button[id*=cookie i] , button[class*=cookie i] , div[id*=consent i], div[class*=sidebar i], div[class*=sidenav i]"
+    "header, footer, nav, script, meta, head, link, a[id*=cookie i], a[class*=cookie i], button[id*=cookie i] , button[class*=cookie i] , div[id*=consent i], div[class*=sidebar i], div[class*=sidenav i], div[class*=ad-block i], div[class*=adblock i]"
   const elements = doc.querySelectorAll(selector)
   for (const element of elements) {
     console.log("Removing element: ", element)
