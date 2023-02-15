@@ -1,3 +1,8 @@
+/**
+Trims white spaces and removes new lines from the given article text content
+@param {HTMLElement} article - The article element to be trimmed
+@returns {string} - The trimmed article text content
+*/
 export const whiteSpaceTrimmer = (article) => {
   const trimmedArticle =
     article && article.textContent

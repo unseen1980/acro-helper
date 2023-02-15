@@ -1,3 +1,11 @@
+/**
+Categorizes the given text using a third-party API.
+@async
+@function categorization
+@param {string} textFromArticle - The text to be categorized.
+@returns {Promise<Object>} A Promise that resolves to an object containing the categorization results.
+@throws {Error} If an error occurs during the API call.
+*/
 export const categorization = async (textFromArticle) => {
   try {
     const rawResponse = await fetch(
@@ -22,6 +30,13 @@ export const categorization = async (textFromArticle) => {
   }
 }
 
+/**
+Determines whether a webpage is tech-related based on its categories
+@async
+@function
+@param {any[]} categories - The categories of the webpage
+@returns {Promise<boolean>} Whether the webpage is tech-related or not
+*/
 export const isTechRelatedWebpage = async (categories: any[]) => {
   const allowedCategories = ["Computers", "Electronics", "Software", "Internet"]
   if (categories && categories.length > 0) {
