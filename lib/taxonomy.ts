@@ -45,7 +45,11 @@ export const isTechRelatedWebpage = async (categories: any[]) => {
     "Internet",
     "Computer Science",
     "Computer Education",
-    "Computer & Video Games"
+    "Computer & Video Games",
+    "Computers & Electronics",
+    "Technology News",
+    "Engineering & Technology",
+    "Technology"
   ]
   if (categories && categories.length > 0) {
     const enable = categories.filter((c) =>
