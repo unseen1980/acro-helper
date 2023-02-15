@@ -38,7 +38,15 @@ Determines whether a webpage is tech-related based on its categories
 @returns {Promise<boolean>} Whether the webpage is tech-related or not
 */
 export const isTechRelatedWebpage = async (categories: any[]) => {
-  const allowedCategories = ["Computers", "Electronics", "Software", "Internet"]
+  const allowedCategories = [
+    "Computers",
+    "Electronics",
+    "Software",
+    "Internet",
+    "Computer Science",
+    "Computer Education",
+    "Computer & Video Games"
+  ]
   if (categories && categories.length > 0) {
     const enable = categories.filter((c) =>
       allowedCategories.some((a) => c.name.indexOf(a) > -1)
