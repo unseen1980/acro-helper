@@ -5,6 +5,7 @@
 /node_modules
 /.pnp
 .pnp.js
+package-lock.json
 
 # testing
 /coverage
@@ -37,3 +38,6 @@ keys.json
 
 # typescript
 .tsbuildinfo
+
+# experiments file
+/lib/wip.ts

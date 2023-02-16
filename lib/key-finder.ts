@@ -21,8 +21,8 @@ export const keyFinder = async (dictionaryKeys) => {
     }
   })
 
-  const foundKeysWtihDefinitions = await getDefinitions(foundKeys)
-  foundKeysWtihDefinitions.forEach((foundKey) => {
+  const foundKeysWithDefinitions = await getDefinitions(foundKeys)
+  foundKeysWithDefinitions.forEach((foundKey) => {
     const key = Object.keys(foundKey)[0]
     foundKeysInDictionary.push(key.toLowerCase().trim())
     const definition = foundKey[key].definition
