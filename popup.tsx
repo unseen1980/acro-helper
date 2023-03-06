@@ -38,7 +38,7 @@ function IndexPopup() {
         }}
         onClick={() => {
           chrome.tabs.create({
-            url: "./tabs/delta-flyer.html"
+            url: "./tabs/dictionary.html"
           })
         }}>
         Visit Dictionary Page
