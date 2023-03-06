@@ -37,7 +37,8 @@ export default function DictionaryPage(props) {
       <div
         style={{
           position: "sticky",
-          top: "0"
+          top: "0",
+          backgroundColor: "#FFFFFF"
         }}>
         <h2 style={{ fontSize: "24px", textAlign: "center" }}>
           Acro Helper Dictionary
@@ -50,7 +51,7 @@ export default function DictionaryPage(props) {
             fontSize: "16px",
             padding: "12px 20px 12px 20px",
             border: "1px solid #ddd",
-            marginBottom: "40px",
+            marginBottom: "20px",
             boxSizing: "border-box",
             width: "100%"
           }}
@@ -62,7 +63,7 @@ export default function DictionaryPage(props) {
       <ul
         style={{
           listStyleType: "none",
-          padding: 0,
+          padding: "1px 0 0 0",
           margin: 0
         }}>
         {dictionary.length > 0 &&
