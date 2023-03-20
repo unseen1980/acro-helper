@@ -67,3 +67,39 @@ export const chatgpt = async (textFromArticle) => {
     console.log(error)
   }
 }
+
+/**
+Check whether the given text content is technology related using GPT model
+@async
+@function
+@param {string} textFromArticle - Text content to check for technology relatedness
+@returns {Promise<boolean>} - A promise that resolves to a boolean indicating whether the text content is technology related or not
+@throws {Error} - If an error occurs while checking the text content
+*/
+export const chatgptIsTechContent = async (textFromArticle) => {
+  try {
+    const rawResponse = await fetch(
+      "https://acro-helper.cyclic.app/api/chatgpt-istechcontent",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        //@ts-ignore
+        body: JSON.stringify({
+          text: textFromArticle
+        })
+      }
+    )
+
+    const isTechContent = await rawResponse.json()
+    console.log(
+      "GPT thinks this is technology related content: ",
+      isTechContent.response
+    )
+    return isTechContent.response
+  } catch (error) {
+    console.log(error)
+  }
+}

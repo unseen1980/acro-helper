@@ -1,10 +1,10 @@
 import type { PlasmoContentScript } from "plasmo"
 
 import { getDictionaryKeys } from "~lib/dictionary"
-import { chatgpt, keyFinder } from "~lib/key-finder"
+import { chatgpt, chatgptIsTechContent, keyFinder } from "~lib/key-finder"
 import { readabilityParser } from "~lib/readability"
 import { sanitizer } from "~lib/sanitizer"
-import { categorization, isTechRelatedWebpage } from "~lib/taxonomy"
+import { categorization, googleIsTechContent } from "~lib/taxonomy"
 import { whiteSpaceTrimmer } from "~lib/text-cleaner"
 
 export const config: PlasmoContentScript = {
@@ -65,9 +65,10 @@ window.addEventListener("load", async () => {
   if (categories.response.categories)
     console.log("Google Taxonomy: ", categories.response.categories)
 
-  const enableExtensionReplacements = await isTechRelatedWebpage(
-    categories.response.categories
-  )
+  const enableExtensionReplacements =
+    (await googleIsTechContent(categories.response.categories)) ||
+    (await chatgptIsTechContent(textFromArticle))
+
   if (enableExtensionReplacements)
     console.log("Enable extension replacements: ", enableExtensionReplacements)
 

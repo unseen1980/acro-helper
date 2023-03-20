@@ -37,7 +37,7 @@ Determines whether a webpage is tech-related based on its categories
 @param {any[]} categories - The categories of the webpage
 @returns {Promise<boolean>} Whether the webpage is tech-related or not
 */
-export const isTechRelatedWebpage = async (categories: any[]) => {
+export const googleIsTechContent = async (categories: any[]) => {
   const allowedCategories = [
     "Computers",
     "Electronics",
