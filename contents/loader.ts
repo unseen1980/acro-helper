@@ -12,6 +12,18 @@ export const config: PlasmoContentScript = {
   exclude_matches: ["*://*/*google*"]
 }
 
+export const splitTextIntoChunks = (text, chunkSize) => {
+  const words = text.split(/\s+/)
+  const chunks = []
+
+  for (let i = 0; i < words.length; i += chunkSize) {
+    const chunk = words.slice(i, i + chunkSize).join(" ")
+    chunks.push(chunk)
+  }
+
+  return chunks
+}
+
 const css = `
 .acro-helper {
     position: relative;
@@ -78,7 +90,16 @@ window.addEventListener("load", async () => {
 
     await keyFinder(dictionaryKeys)
 
-    await chatgpt(textFromArticle)
+    const textChunks = splitTextIntoChunks(textFromArticle, 1000)
+    const promises = textChunks.map((chunk) => chatgpt(chunk))
+
+    Promise.all(promises)
+      .then(() => {
+        console.log("All content from ChatGPT fetched")
+      })
+      .catch((error) => {
+        console.error("Error fetching content from ChatGPT", error)
+      })
 
     console.log("Tooltips appended.")
   } else {
