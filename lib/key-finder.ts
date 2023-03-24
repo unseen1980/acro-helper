@@ -26,9 +26,9 @@ export const keyFinder = async (dictionaryKeys) => {
     const key = Object.keys(foundKey)[0]
     foundKeysInDictionary.push(key.toLowerCase().trim())
     const definition = foundKey[key].definition
-    console.log(`Dictionary findings: ${key} - ${definition}`)
     replacer("body", key, definition)
   })
+  console.log(`Dictionary findings: ${foundKeys}`)
 }
 
 /**

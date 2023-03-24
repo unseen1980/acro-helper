@@ -10,11 +10,11 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "@extractus/article-extractor": "7.2.8",
     "@mozilla/readability": "^0.4.2",
     "plasmo": "0.62.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "newspaperjs": "1.0.8"
   },
   "devDependencies": {
     "@plasmohq/prettier-plugin-sort-imports": "3.6.1",

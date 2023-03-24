@@ -1,9 +1,10 @@
+import { Article } from "newspaperjs"
 import type { PlasmoContentScript } from "plasmo"
 
 import { getDictionaryKeys } from "~lib/dictionary"
 import { chatgpt, chatgptIsTechContent, keyFinder } from "~lib/key-finder"
-import { readabilityParser } from "~lib/readability"
-import { sanitizer } from "~lib/sanitizer"
+// import { readabilityParser } from "~lib/readability"
+// import { sanitizer } from "~lib/sanitizer"
 import { categorization, googleIsTechContent } from "~lib/taxonomy"
 import { whiteSpaceTrimmer } from "~lib/text-cleaner"
 
@@ -64,11 +65,17 @@ head.appendChild(style)
 style.appendChild(document.createTextNode(css))
 
 window.addEventListener("load", async () => {
-  const documentCopy = sanitizer(document.cloneNode(true))
-  console.log("Clean copy of document: ", documentCopy)
+  // Temporary switching to Newspaperjs library for testing. Would be good to explore using both at the same time.
+  // const documentCopy = sanitizer(document.cloneNode(true))
+  // console.log("Clean copy of document: ", documentCopy)
+  // let article = readabilityParser(documentCopy)
+  // console.log("Readability article: ", article)
 
-  let article = readabilityParser(documentCopy)
-  console.log("Readability article: ", article)
+  let article = await Article(document.URL)
+
+  if (article && article.text) {
+    article = article.text
+  }
 
   const textFromArticle = whiteSpaceTrimmer(article)
   console.log("Text extraction: ", textFromArticle)
@@ -96,12 +103,11 @@ window.addEventListener("load", async () => {
     Promise.all(promises)
       .then(() => {
         console.log("All content from ChatGPT fetched")
+        console.log("Tooltips appended.")
       })
       .catch((error) => {
         console.error("Error fetching content from ChatGPT", error)
       })
-
-    console.log("Tooltips appended.")
   } else {
     console.log(
       "This is not a technology related webpage. Thanks for using Acro Helper."
